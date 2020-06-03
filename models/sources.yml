@@ -1,0 +1,18 @@
+version: 2
+
+sources:
+  - name: clicky_sources
+    database: raw
+    schema: clicky
+    tables:
+      - name: actions_list
+      - name: visitors_list
+      - name: campaigns
+      - name: domain_information
+      - name: pages_entrance
+      - name: pages_exit
+      - name: pages
+      - name: searches_engines
+      - name: searches_keywords
+      - name: searches_unique
+      - name: traffic_sources
