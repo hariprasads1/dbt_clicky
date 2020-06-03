@@ -20,4 +20,6 @@ select
     referrer_url::varchar as referrer_url,
     _fivetran_synced::timestamp_tz as record_loaded_at
 from {{ source('clicky_sources', 'actions_list') }}
-{{ do_incremental() }}
+{% if is_incremental() %}
+    where record_loaded_at > (select max(record_loaded_at) from {{this}})
+{% endif %}
