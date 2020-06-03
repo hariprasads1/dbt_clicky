@@ -11,4 +11,6 @@ select
     logo::varchar as logo_URL,
     _fivetran_synced::timestamp_tz as record_loaded_at
 from {{ source('clicky_sources', 'domain_information') }}
-{{ do_incremental() }}
+{% if is_incremental() %}
+    where record_loaded_at > (select max(record_loaded_at) from {{this}})
+{% endif %}
